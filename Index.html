@@ -1,0 +1,968 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070c">
+<title>GLAD SOUNDS AND DECOR</title>
+
+<style>
+:root {
+  --cyan: #00eaff;
+  --gold: #ffd36a;
+  --bg: #05070c;
+  --panel: #101722;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(ellipse at 50% 0%, #142432 0%, transparent 48%),
+    var(--bg);
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.page.active {
+  display: flex;
+  animation: pageIn .7s ease both;
+}
+
+@keyframes pageIn {
+  from { opacity: 0; transform: scale(.985); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Ambient futuristic background */
+
+.ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.ambient::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background-image:
+    linear-gradient(#00eaff0c 1px, transparent 1px),
+    linear-gradient(90deg, #00eaff0c 1px, transparent 1px);
+  background-size: 42px 42px;
+  transform: perspective(450px) rotateX(58deg) translateY(8%);
+  animation: gridMove 18s linear infinite;
+}
+
+.ambient::after {
+  content: "";
+  position: absolute;
+  width: 65vw;
+  height: 65vw;
+  max-width: 500px;
+  max-height: 500px;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #00c8ff0b;
+  filter: blur(70px);
+}
+
+@keyframes gridMove {
+  from { background-position: 0 0; }
+  to { background-position: 0 84px; }
+}
+
+/* Logo appears on all pages */
+
+.site-logo {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  width: 66px;
+  height: 66px;
+  object-fit: contain;
+  z-index: 100;
+  border-radius: 12px;
+  filter: drop-shadow(0 0 8px #00eaff66);
+  animation: logoIn 1s ease both;
+}
+
+@keyframes logoIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Common buttons */
+
+.neon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 13px 23px;
+  border: 1px solid var(--cyan);
+  border-radius: 30px;
+  background: #00eaff12;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: .6px;
+  cursor: pointer;
+  box-shadow: 0 0 16px #00eaff18, inset 0 0 12px #00eaff08;
+  transition: .25s ease;
+}
+
+.neon-btn:hover, .neon-btn:focus-visible {
+  background: var(--cyan);
+  color: #001016;
+  box-shadow: 0 0 25px #00eaff77;
+  outline: none;
+}
+
+.gold-btn {
+  border-color: var(--gold);
+  background: #ffd36a12;
+}
+
+.gold-btn:hover, .gold-btn:focus-visible {
+  background: var(--gold);
+  color: #1b1200;
+  box-shadow: 0 0 25px #ffd36a77;
+}
+
+/* PAGE 1: INTRO */
+
+#intro {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 20px 45px;
+  isolation: isolate;
+}
+
+.intro-content {
+  width: 100%;
+  max-width: 900px;
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  color: var(--cyan);
+  font-size: 11px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(15px, 5vw, 50px);
+  min-height: 155px;
+}
+
+.initial {
+  font-size: clamp(82px, 19vw, 150px);
+  line-height: 1;
+  font-weight: 900;
+  font-style: italic;
+  background: linear-gradient(145deg, #fff 5%, var(--cyan) 35%, #527dff 65%, var(--gold));
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  filter: drop-shadow(0 0 18px #00eaff50);
+  opacity: 0;
+  transform: translateY(45px) rotateX(60deg) scale(.5);
+}
+
+.initial.pop {
+  animation: letterPop .75s cubic-bezier(.2, .8, .2, 1) forwards;
+}
+
+.initial:nth-child(2) { animation-delay: .25s; }
+.initial:nth-child(3) { animation-delay: .5s; }
+
+@keyframes letterPop {
+  60% { opacity: 1; transform: translateY(-8px) rotateX(0) scale(1.12); }
+  100% { opacity: 1; transform: translateY(0) rotateX(0) scale(1); }
+}
+
+.brand-name {
+  opacity: 0;
+  transform: scale(.8);
+  transition: opacity .7s ease, transform .7s ease;
+  margin: 15px auto 0;
+}
+
+.brand-name.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.brand-name h1 {
+  font-size: clamp(28px, 7vw, 62px);
+  font-style: italic;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: clamp(1px, .8vw, 7px);
+  background: linear-gradient(90deg, #fff, var(--cyan), var(--gold));
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.brand-name p {
+  margin-top: 15px;
+  font-size: clamp(11px, 2.5vw, 16px);
+  letter-spacing: 5px;
+  color: #d9e8f0;
+}
+
+.intro-caption {
+  margin-top: 32px;
+  color: #9db0bd;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.portal {
+  position: fixed;
+  z-index: 20;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--cyan);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  box-shadow: 0 0 25px var(--cyan), inset 0 0 20px var(--cyan);
+  pointer-events: none;
+}
+
+.portal.open {
+  animation: portalOpen 1.25s ease-in forwards;
+}
+
+@keyframes portalOpen {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+    border-width: 5px;
+  }
+  45% {
+    opacity: 1;
+    border-width: 2px;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(110);
+    opacity: 0;
+    border-width: 0;
+  }
+}
+
+/* PAGE 2: EVENTS */
+
+#events {
+  flex-direction: column;
+  align-items: center;
+  padding: 105px 15px 30px;
+  gap: 20px;
+  isolation: isolate;
+}
+
+.section-heading {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+}
+
+.section-heading .mini {
+  color: var(--cyan);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-size: 10px;
+  margin-bottom: 10px;
+}
+
+.section-heading h2 {
+  font-size: clamp(25px, 6vw, 42px);
+  font-style: italic;
+  letter-spacing: 2px;
+}
+
+.section-heading h2 span {
+  color: var(--gold);
+}
+
+.gallery {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.gallery-frame {
+  position: relative;
+  width: 100%;
+  height: min(57vh, 510px);
+  min-height: 260px;
+  overflow: hidden;
+  border: 1px solid #00eaff66;
+  border-radius: 18px;
+  background: #101722;
+  box-shadow: 0 0 30px #00eaff15, 0 20px 60px #0009;
+  isolation: isolate;
+}
+
+.event-card {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.06);
+  transition: opacity .65s ease, transform 1s ease, visibility .65s;
+}
+
+.event-card.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.event-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  background: linear-gradient(135deg, #142432, #05070c);
+}
+
+.event-card::after {
+  content: "";
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(transparent, #000d);
+  pointer-events: none;
+}
+
+.card-brand {
+  position: absolute;
+  z-index: 2;
+  left: 15px;
+  right: 15px;
+  bottom: 23px;
+  text-align: center;
+  font-size: clamp(21px, 5vw, 42px);
+  line-height: 1.1;
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 0 14px #00eaff88;
+}
+
+.card-brand span {
+  display: block;
+  color: var(--gold);
+  font-size: .52em;
+  letter-spacing: 5px;
+  margin-top: 8px;
+}
+
+.gallery-arrow {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 43px;
+  height: 43px;
+  border: 1px solid #ffffff66;
+  border-radius: 50%;
+  background: #03070bcc;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.gallery-arrow:hover {
+  background: var(--cyan);
+  color: #001016;
+}
+
+.gallery-arrow.prev { left: 12px; }
+.gallery-arrow.next { right: 12px; }
+
+.gallery-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.counter {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #b9c9d4;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 20px;
+  border: none;
+  background: #63727d;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.dot.active {
+  width: 25px;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+}
+
+.event-actions {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  padding-bottom: 15px;
+}
+
+.small-note {
+  color: #778c99;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* PAGE 3: CONTACT */
+
+#contact {
+  align-items: center;
+  justify-content: center;
+  padding: 105px 20px 40px;
+  isolation: isolate;
+}
+
+.contact-wrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 650px;
+  text-align: center;
+}
+
+.contact-kicker {
+  color: var(--cyan);
+  font-size: 11px;
+  letter-spacing: 6px;
+  margin-bottom: 17px;
+}
+
+.contact-wrap h2 {
+  font-size: clamp(32px, 8vw, 62px);
+  font-style: italic;
+  font-weight: 900;
+  background: linear-gradient(100deg, #fff, var(--cyan), var(--gold));
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.contact-wrap .subtitle {
+  margin-top: 14px;
+  color: #b2c3ce;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.contact-card {
+  margin: 35px auto 25px;
+  padding: 28px 20px;
+  max-width: 460px;
+  border: 1px solid #00eaff55;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #0c1720dd, #10111add);
+  box-shadow: 0 0 35px #00eaff0c;
+}
+
+.contact-label {
+  color: #93a8b4;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.phone-number {
+  margin: 15px 0 23px;
+  color: #fff;
+  font-size: clamp(25px, 7vw, 36px);
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.back-btn {
+  margin-top: 20px;
+}
+
+.footer {
+  margin-top: 36px;
+  color: #647985;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+/* Mobile refinements */
+
+@media (max-width: 500px) {
+  .site-logo {
+    width: 54px;
+    height: 54px;
+    top: 10px;
+    right: 10px;
+  }
+
+  #events {
+    padding-top: 90px;
+  }
+
+  .gallery-frame {
+    height: 53vh;
+    min-height: 270px;
+  }
+
+  .gallery-arrow {
+    width: 37px;
+    height: 37px;
+  }
+
+  .gallery-arrow.prev { left: 8px; }
+  .gallery-arrow.next { right: 8px; }
+
+  .gallery-bottom {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .card-brand span {
+    letter-spacing: 3px;
+  }
+
+  .event-actions .neon-btn {
+    padding: 12px 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="ambient" aria-hidden="true"></div>
+
+<!-- This logo stays at the top-right on all three pages -->
+<img class="site-logo" src="logo.png" alt="GLAD Sounds and Decor logo">
+
+<div class="portal" id="portal" aria-hidden="true"></div>
+
+<!-- PAGE 1: CINEMATIC INTRO -->
+<section class="page active" id="intro">
+  <div class="intro-content">
+    <div class="eyebrow">Sound • Light • Celebration</div>
+
+    <div class="initials" id="initials">
+      <span class="initial">G</span>
+      <span class="initial">S</span>
+      <span class="initial">D</span>
+    </div>
+
+    <div class="brand-name" id="brandName">
+      <h1>GLAD</h1>
+      <p>SOUNDS AND DECOR</p>
+    </div>
+
+    <p class="intro-caption" id="introCaption">
+      Creating unforgettable moments
+    </p>
+  </div>
+</section>
+
+<!-- PAGE 2: EVENT GALLERY -->
+<section class="page" id="events">
+  <div class="section-heading">
+    <p class="mini">Make every moment extraordinary</p>
+    <h2>OUR <span>EVENTS</span></h2>
+  </div>
+
+  <div class="gallery">
+    <div class="gallery-frame" id="galleryFrame">
+
+      <article class="event-card active">
+        <img src="a.jpg" alt="GLAD Sounds and Decor event 1">
+        <h3 class="card-brand">GLAD <span>SOUNDS AND DECOR</span></h3>
+      </article>
+
+      <article class="event-card">
+        <img src="b.jpg" alt="GLAD Sounds and Decor event 2">
+        <h3 class="card-brand">GLAD <span>SOUNDS AND DECOR</span></h3>
+      </article>
+
+      <article class="event-card">
+        <img src="c.jpg" alt="GLAD Sounds and Decor event 3">
+        <h3 class="card-brand">GLAD <span>SOUNDS AND DECOR</span></h3>
+      </article>
+
+      <article class="event-card">
+        <img src="d.jpg" alt="GLAD Sounds and Decor event 4">
+        <h3 class="card-brand">GLAD <span>SOUNDS AND DECOR</span></h3>
+      </article>
+
+      <article class="event-card">
+        <img src="e.jpg" alt="GLAD Sounds and Decor event 5">
+        <h3 class="card-brand">GLAD <span>SOUNDS AND DECOR</span></h3>
+      </article>
+
+      <article class="event-card">
+        <img src="f.jpg" alt="GLAD Sounds and Decor event 6">
+        <h3 class="card-brand">GLAD <span>SOUNDS AND DECOR</span></h3>
+      </article>
+
+      <button class="gallery-arrow prev" id="prevBtn"
+              aria-label="Previous image">‹</button>
+      <button class="gallery-arrow next" id="nextBtn"
+              aria-label="Next image">›</button>
+    </div>
+
+    <div class="gallery-bottom">
+      <span class="counter" id="counter">01 / 06</span>
+      <div class="dots" id="dots" aria-label="Choose event photo"></div>
+      <span class="counter">GLAD • GSD</span>
+    </div>
+  </div>
+
+  <div class="event-actions">
+    <button class="neon-btn gold-btn" id="contactBtn">
+      CONTACT US <span aria-hidden="true">↗</span>
+    </button>
+  </div>
+
+  <p class="small-note">SWIPE TO EXPLORE OUR GALLERY</p>
+</section>
+
+<!-- PAGE 3: CONTACT -->
+<section class="page" id="contact">
+  <div class="contact-wrap">
+    <p class="contact-kicker">LET'S CREATE SOMETHING AMAZING</p>
+    <h2>CONTACT US</h2>
+    <p class="subtitle">
+      Make your celebration unforgettable with<br>
+      GLAD SOUNDS AND DECOR.
+    </p>
+
+    <div class="contact-card">
+      <p class="contact-label">Call or WhatsApp</p>
+      <p class="phone-number">9663019431</p>
+
+      <div class="contact-actions">
+        <a class="neon-btn" href="tel:+919663019431">
+          ☎ CALL NOW
+        </a>
+
+        <a class="neon-btn gold-btn"
+           href="https://wa.me/919663019431"
+           target="_blank" rel="noopener noreferrer">
+          WHATSAPP ↗
+        </a>
+      </div>
+    </div>
+
+    <button class="neon-btn back-btn" id="backBtn">
+      ← BACK TO EVENTS
+    </button>
+
+    <p class="footer">GLAD SOUNDS AND DECOR · EVERY MOMENT MATTERS</p>
+  </div>
+</section>
+
+<script>
+(() => {
+  "use strict";
+
+  const pages = {
+    intro: document.getElementById("intro"),
+    events: document.getElementById("events"),
+    contact: document.getElementById("contact")
+  };
+
+  const portal = document.getElementById("portal");
+  const initials = document.querySelectorAll(".initial");
+  const brandName = document.getElementById("brandName");
+  const introCaption = document.getElementById("introCaption");
+
+  let currentPage = "intro";
+  let currentSlide = 0;
+  let slideTimer = null;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let introTimers = [];
+
+  const cards = Array.from(document.querySelectorAll(".event-card"));
+  const dotsContainer = document.getElementById("dots");
+  const counter = document.getElementById("counter");
+  const galleryFrame = document.getElementById("galleryFrame");
+
+  function clearIntroTimers() {
+    introTimers.forEach(clearTimeout);
+    introTimers = [];
+  }
+
+  function navigateTo(pageName) {
+    if (!pages[pageName]) return;
+
+    currentPage = pageName;
+
+    Object.values(pages).forEach(page => {
+      page.classList.remove("active");
+    });
+
+    pages[pageName].classList.add("active");
+
+    if (pageName === "events") {
+      startSlideshow();
+    } else {
+      stopSlideshow();
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function playPortal(callback) {
+    portal.classList.remove("open");
+
+    // Restart the CSS animation.
+    void portal.offsetWidth;
+
+    portal.classList.add("open");
+
+    setTimeout(() => {
+      callback();
+      portal.classList.remove("open");
+    }, 550);
+  }
+
+  function startIntro() {
+    clearIntroTimers();
+
+    initials.forEach(letter => letter.classList.remove("pop"));
+    brandName.classList.remove("show");
+    introCaption.style.opacity = "1";
+
+    // Pop the G, S and D letters into view.
+    requestAnimationFrame(() => {
+      initials.forEach(letter => letter.classList.add("pop"));
+    });
+
+    // Open the portal and reveal the full company name.
+    introTimers.push(setTimeout(() => {
+      portal.classList.remove("open");
+      void portal.offsetWidth;
+      portal.classList.add("open");
+
+      brandName.classList.add("show");
+      introCaption.style.opacity = "0.6";
+    }, 2200));
+
+    // Automatically move to the gallery after the brand reveal.
+    introTimers.push(setTimeout(() => {
+      navigateTo("events");
+    }, 4700));
+  }
+
+  function buildDots() {
+    dotsContainer.innerHTML = "";
+
+    cards.forEach((card, index) => {
+      const dot = document.createElement("button");
+      dot.className = "dot";
+      dot.type = "button";
+      dot.setAttribute("aria-label", "Show image " + (index + 1));
+
+      dot.addEventListener("click", () => {
+        showSlide(index);
+        restartSlideshow();
+      });
+
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  function showSlide(index) {
+    currentSlide = (index + cards.length) % cards.length;
+
+    cards.forEach((card, i) => {
+      card.classList.toggle("active", i === currentSlide);
+    });
+
+    Array.from(dotsContainer.children).forEach((dot, i) => {
+      dot.classList.toggle("active", i === currentSlide);
+    });
+
+    counter.textContent =
+      String(currentSlide + 1).padStart(2, "0") +
+      " / " +
+      String(cards.length).padStart(2, "0");
+  }
+
+  function nextSlide() {
+    showSlide(currentSlide + 1);
+  }
+
+  function previousSlide() {
+    showSlide(currentSlide - 1);
+  }
+
+  function startSlideshow() {
+    stopSlideshow();
+
+    slideTimer = setInterval(() => {
+      if (currentPage === "events") nextSlide();
+    }, 5000);
+  }
+
+  function stopSlideshow() {
+    if (slideTimer !== null) {
+      clearInterval(slideTimer);
+      slideTimer = null;
+    }
+  }
+
+  function restartSlideshow() {
+    startSlideshow();
+  }
+
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    nextSlide();
+    restartSlideshow();
+  });
+
+  document.getElementById("prevBtn").addEventListener("click", () => {
+    previousSlide();
+    restartSlideshow();
+  });
+
+  document.getElementById("contactBtn").addEventListener("click", () => {
+    playPortal(() => navigateTo("contact"));
+  });
+
+  document.getElementById("backBtn").addEventListener("click", () => {
+    playPortal(() => navigateTo("events"));
+  });
+
+  // Touch gestures for mobile gallery.
+  galleryFrame.addEventListener("touchstart", event => {
+    const touch = event.changedTouches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  }, { passive: true });
+
+  galleryFrame.addEventListener("touchend", event => {
+    const touch = event.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) nextSlide();
+      else previousSlide();
+
+      restartSlideshow();
+    }
+  }, { passive: true });
+
+  // Pause automatic changes while the user is interacting.
+  galleryFrame.addEventListener("mouseenter", stopSlideshow);
+  galleryFrame.addEventListener("mouseleave", () => {
+    if (currentPage === "events") startSlideshow();
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopSlideshow();
+    } else if (currentPage === "events") {
+      startSlideshow();
+    }
+  });
+
+  buildDots();
+  showSlide(0);
+  startIntro();
+})();
+</script>
+
+</body>
+</html>
