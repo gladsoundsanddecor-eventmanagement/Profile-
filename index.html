@@ -3,586 +3,1247 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#03050a">
-<meta name="description" content="GLAD Sounds and Decor — Sound, lighting and event decoration.">
-<title>GLAD SOUNDS AND DECOR | Official</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#03050b">
+<meta name="description" content="GLAD SOUNDS AND DECOR - Sound, lighting, decoration and unforgettable events.">
+<title>GLAD SOUNDS AND DECOR | Event Experiences</title>
 
 <style>
 :root {
-  --cyan:#00eaff;
-  --blue:#526dff;
-  --gold:#ffd36a;
-  --red:#ff2348;
-  --bg:#03050a;
+  --bg: #03050b;
+  --cyan: #00f5ff;
+  --blue: #526dff;
+  --gold: #ffc857;
+  --white: #f5f8ff;
+  --muted: #9ba8c4;
 }
-* { box-sizing:border-box; margin:0; padding:0; }
-html { scroll-behavior:smooth; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  min-height:100vh;
-  overflow-x:hidden;
-  background:var(--bg);
-  color:#fff;
-  font-family:Arial,Helvetica,sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
 }
-button,a { -webkit-tap-highlight-color:transparent; }
-button { font:inherit; }
-button:focus-visible,a:focus-visible { outline:2px solid var(--cyan); outline-offset:4px; }
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#universe {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 20%, #10254a55, transparent 42%),
+    radial-gradient(ellipse at 85% 75%, #39105a44, transparent 42%),
+    #03050b;
+}
+
+.grid-floor {
+  position: absolute;
+  width: 160%;
+  height: 70%;
+  left: -30%;
+  bottom: -25%;
+  opacity: .2;
+  transform: perspective(450px) rotateX(60deg);
+  transform-origin: center top;
+  background-image:
+    linear-gradient(#00f5ff35 1px, transparent 1px),
+    linear-gradient(90deg, #00f5ff35 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, transparent, black 30%, transparent);
+  animation: gridMove 12s linear infinite;
+}
 
 .ambient {
-  position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:0;
-  background:
-    radial-gradient(ellipse at 50% 10%,#092333 0%,transparent 48%),
-    radial-gradient(ellipse at 10% 85%,#11102c 0%,transparent 45%);
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: .16;
+  animation: floatGlow 9s ease-in-out infinite alternate;
 }
-.ambient:before {
-  content:""; position:absolute; inset:-50%;
-  background-image:linear-gradient(#00eaff0b 1px,transparent 1px),
-    linear-gradient(90deg,#00eaff0b 1px,transparent 1px);
-  background-size:42px 42px;
-  transform:perspective(450px) rotateX(58deg) translateY(8%);
-  animation:gridMove 18s linear infinite;
-}
-.ambient:after {
-  content:""; position:absolute; width:65vw; height:65vw; max-width:500px; max-height:500px;
-  top:5%; left:50%; transform:translateX(-50%); border-radius:50%;
-  background:#00c8ff12; filter:blur(70px);
-}
-@keyframes gridMove { to { background-position:0 84px; } }
 
-.logo-wrap {
-  position:fixed; top:12px; right:12px; z-index:100;
-  width:64px; height:64px; display:grid; place-items:center;
-  border:1px solid #00eaff44; border-radius:15px;
-  background:#060a10d9; box-shadow:0 0 20px #00eaff16;
-  overflow:hidden;
+.ambient.one {
+  background: var(--cyan);
+  top: 5%;
+  left: -150px;
 }
-.site-logo { width:100%; height:100%; object-fit:contain; padding:4px; }
+
+.ambient.two {
+  background: #743cff;
+  right: -150px;
+  bottom: 5%;
+  animation-delay: -4s;
+}
+
+@keyframes gridMove {
+  to { background-position: 0 96px, 96px 0; }
+}
+
+@keyframes floatGlow {
+  to { transform: translate(60px, -45px) scale(1.2); }
+}
+
+/* FIXED LOGO */
+
+.brand-logo {
+  position: fixed;
+  z-index: 100;
+  top: 16px;
+  right: 16px;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  border: 1px solid #00f5ff77;
+  background: #050914dd;
+  box-shadow: 0 0 18px #00f5ff30, inset 0 0 15px #00f5ff12;
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+}
+
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
 .logo-fallback {
-  display:none; font-weight:1000; font-style:italic; font-size:22px;
-  color:var(--cyan); text-shadow:0 0 12px var(--cyan);
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  color: var(--cyan);
+  text-shadow: 0 0 12px var(--cyan);
 }
-.logo-wrap.broken .site-logo { display:none; }
-.logo-wrap.broken .logo-fallback { display:block; }
+
+/* TOP STATUS */
+
+.status {
+  position: fixed;
+  top: 24px;
+  left: 18px;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #b9c8e8;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00ff9d;
+  box-shadow: 0 0 12px #00ff9d;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: .35; }
+}
+
+/* PAGE SYSTEM */
 
 .page {
-  display:none; position:relative; z-index:1;
-  min-height:100svh; width:100%; overflow:hidden;
-}
-.page.active { display:flex; animation:pageIn .6s ease both; }
-@keyframes pageIn {
-  from { opacity:0; transform:scale(.985); }
-  to { opacity:1; transform:scale(1); }
+  position: relative;
+  z-index: 2;
+  min-height: 100svh;
+  width: 100%;
+  display: none;
+  opacity: 0;
 }
 
-/* CINEMATIC OPENING */
+.page.active {
+  display: flex;
+  animation: pageEnter .85s cubic-bezier(.16, 1, .3, 1) forwards;
+}
+
+.page.leaving {
+  animation: pageLeave .35s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+    transform: scale(1.035);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes pageLeave {
+  to {
+    opacity: 0;
+    filter: blur(12px);
+    transform: scale(.97);
+  }
+}
+
+/* CINEMATIC INTRO */
+
 #intro {
-  align-items:center; justify-content:center; text-align:center;
-  padding:90px 20px 40px; isolation:isolate;
-  background:radial-gradient(ellipse at center,#101923 0%,#03050a 70%);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 22px 50px;
+  overflow: hidden;
 }
-.intro-content { width:100%; max-width:900px; position:relative; z-index:2; }
-.netflix-line {
-  position:absolute; top:0; left:0; width:100%; height:3px;
-  background:linear-gradient(90deg,transparent,var(--red),var(--gold),var(--cyan),transparent);
-  transform:scaleX(0); transform-origin:left;
-}
-#intro.playing .netflix-line { animation:laserLine 1.6s ease .2s forwards; }
-@keyframes laserLine { to { transform:scaleX(1); } }
 
-.intro-kicker {
-  color:#b5c8d5; font-size:10px; letter-spacing:7px;
-  text-transform:uppercase; opacity:0;
+.intro-content {
+  width: 100%;
+  max-width: 850px;
+  position: relative;
 }
-#intro.playing .intro-kicker { animation:fadeUp .8s ease .3s forwards; }
-.initials {
-  display:flex; justify-content:center; align-items:center;
-  gap:clamp(12px,5vw,48px); min-height:clamp(130px,26vw,220px);
-  perspective:800px;
+
+.intro-eyebrow {
+  color: var(--cyan);
+  font-size: 10px;
+  letter-spacing: 5px;
+  margin-bottom: 25px;
+  opacity: 0;
+  animation: riseIn .8s .4s forwards;
 }
-.initial {
-  display:inline-block; font-size:clamp(90px,21vw,175px);
-  line-height:1; font-weight:1000; font-style:italic;
-  color:transparent;
-  background:linear-gradient(145deg,#fff 4%,var(--cyan) 34%,var(--blue) 64%,var(--gold));
-  background-clip:text; -webkit-background-clip:text;
-  filter:drop-shadow(0 0 20px #00eaff55);
-  opacity:0; transform:translateY(50px) rotateY(70deg) scale(.4);
+
+.monogram {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 3vw, 28px);
+  margin-bottom: 28px;
 }
-#intro.playing .initial:nth-child(1) { animation:letterReveal .85s cubic-bezier(.2,.8,.2,1) .65s forwards; }
-#intro.playing .initial:nth-child(2) { animation:letterReveal .85s cubic-bezier(.2,.8,.2,1) 1.05s forwards; }
-#intro.playing .initial:nth-child(3) { animation:letterReveal .85s cubic-bezier(.2,.8,.2,1) 1.45s forwards; }
+
+.letter {
+  display: inline-block;
+  font-size: clamp(70px, 18vw, 150px);
+  font-weight: 950;
+  font-style: italic;
+  line-height: 1;
+  color: transparent;
+  background: linear-gradient(145deg, #fff 5%, var(--cyan) 40%, #5570ff 75%, #fff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  filter: drop-shadow(0 0 24px #00eaff35);
+  opacity: 0;
+  transform: translateY(55px) rotateX(70deg);
+  animation: letterReveal .9s cubic-bezier(.16, 1, .3, 1) forwards;
+}
+
+.letter:nth-child(1) { animation-delay: .7s; }
+.letter:nth-child(2) { animation-delay: 1s; }
+.letter:nth-child(3) { animation-delay: 1.3s; }
+
 @keyframes letterReveal {
-  65% { opacity:1; transform:translateY(-8px) rotateY(0) scale(1.12); }
-  100% { opacity:1; transform:translateY(0) rotateY(0) scale(1); }
-}
-.brand-name { opacity:0; transform:scale(.82); }
-#intro.playing .brand-name { animation:brandReveal 1s ease 2.35s forwards; }
-@keyframes brandReveal {
-  0% { opacity:0; transform:scale(.82); filter:blur(12px); }
-  65% { opacity:1; filter:blur(0); transform:scale(1.04); }
-  100% { opacity:1; filter:blur(0); transform:scale(1); }
-}
-.brand-name h1 {
-  font-size:clamp(34px,9vw,78px); line-height:1.05;
-  font-weight:1000; font-style:italic; letter-spacing:clamp(2px,1vw,9px);
-  background:linear-gradient(100deg,#fff,var(--cyan),var(--gold));
-  color:transparent; background-clip:text; -webkit-background-clip:text;
-  text-shadow:0 0 35px #00eaff20;
-}
-.brand-name p {
-  margin-top:13px; color:#e2edf4;
-  font-size:clamp(10px,2.8vw,16px); letter-spacing:clamp(3px,1vw,8px);
-}
-.intro-caption {
-  margin-top:30px; color:#92a8b7; font-size:11px;
-  letter-spacing:3px; text-transform:uppercase; opacity:0;
-}
-#intro.playing .intro-caption { animation:fadeUp .8s ease 3.1s forwards; }
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(12px); }
-  to { opacity:1; transform:translateY(0); }
-}
-.intro-bottom {
-  position:absolute; bottom:28px; left:0; right:0;
-  color:#536875; font-size:9px; letter-spacing:4px;
-}
-.intro-bottom:after {
-  content:""; display:block; width:70px; height:2px; margin:12px auto 0;
-  background:linear-gradient(90deg,var(--cyan),var(--gold));
-  animation:barPulse 1.5s ease-in-out infinite alternate;
-}
-@keyframes barPulse { to { width:140px; opacity:.45; } }
-
-/* PORTAL / HYBRID TRANSITION */
-.portal {
-  position:fixed; z-index:200; left:50%; top:50%;
-  width:10px; height:10px; border-radius:50%;
-  border:2px solid var(--cyan); pointer-events:none;
-  opacity:0; transform:translate(-50%,-50%) scale(0);
-  box-shadow:0 0 20px var(--cyan),inset 0 0 20px var(--cyan);
-}
-.portal.open { animation:portalBurst .85s ease-in forwards; }
-@keyframes portalBurst {
-  0% { opacity:1; transform:translate(-50%,-50%) scale(0); border-width:5px; }
-  45% { opacity:1; border-width:2px; }
-  100% { opacity:0; transform:translate(-50%,-50%) scale(115); border-width:0; }
-}
-.transition-flash {
-  position:fixed; z-index:150; inset:0; pointer-events:none;
-  background:linear-gradient(115deg,transparent 20%,#00eaff55 48%,#ffd36a33 52%,transparent 75%);
-  transform:translateX(-120%);
-}
-.transition-flash.run { animation:hybridFlash .75s ease-in-out; }
-@keyframes hybridFlash {
-  0% { transform:translateX(-120%); }
-  55% { transform:translateX(0); }
-  100% { transform:translateX(120%); }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
 }
 
-/* BUTTONS */
-.neon-btn {
-  display:inline-flex; align-items:center; justify-content:center; gap:9px;
-  min-height:47px; padding:13px 22px;
-  border:1px solid var(--cyan); border-radius:30px;
-  background:#00eaff12; color:#fff; text-decoration:none;
-  font-weight:800; font-size:12px; letter-spacing:1px;
-  cursor:pointer; transition:transform .25s,background .25s,box-shadow .25s;
-  box-shadow:0 0 16px #00eaff18,inset 0 0 12px #00eaff08;
+.laser {
+  height: 2px;
+  width: 0;
+  max-width: 500px;
+  margin: 0 auto 28px;
+  background: linear-gradient(90deg, transparent, var(--cyan), white, var(--gold), transparent);
+  box-shadow: 0 0 25px var(--cyan);
+  animation: laserOpen 1.1s 1.45s forwards;
 }
-.neon-btn:hover { background:var(--cyan); color:#001016; box-shadow:0 0 25px #00eaff77; transform:translateY(-2px); }
-.gold-btn { border-color:var(--gold); background:#ffd36a12; }
-.gold-btn:hover { background:var(--gold); color:#1b1200; box-shadow:0 0 25px #ffd36a77; }
 
-/* EVENTS */
+@keyframes laserOpen {
+  to { width: 85%; }
+}
+
+.brand-title {
+  font-size: clamp(20px, 5.4vw, 43px);
+  line-height: 1.3;
+  font-weight: 900;
+  letter-spacing: clamp(2px, 1.1vw, 8px);
+  text-transform: uppercase;
+  opacity: 0;
+  animation: riseIn .9s 1.7s forwards;
+  text-shadow: 0 0 30px #00eaff1b;
+}
+
+.brand-title span {
+  display: block;
+  color: var(--gold);
+  font-size: .7em;
+  letter-spacing: clamp(5px, 2vw, 13px);
+  margin-top: 9px;
+}
+
+.intro-tagline {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-top: 23px;
+  opacity: 0;
+  animation: riseIn .8s 2s forwards;
+}
+
+.intro-button {
+  margin-top: 38px;
+  border: 1px solid #00f5ff88;
+  border-radius: 50px;
+  background: #00f5ff0c;
+  color: white;
+  padding: 15px 25px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  cursor: pointer;
+  box-shadow: 0 0 25px #00f5ff12;
+  opacity: 0;
+  animation: riseIn .8s 2.3s forwards, buttonGlow 3s 3s infinite;
+  transition: .3s;
+}
+
+.intro-button:hover {
+  background: var(--cyan);
+  color: #03050b;
+  transform: translateY(-3px);
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes buttonGlow {
+  50% { box-shadow: 0 0 25px #00f5ff45; }
+}
+
+.intro-footer {
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  right: 0;
+  color: #71809e;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+/* PORTAL TRANSITION */
+
+#transition {
+  position: fixed;
+  z-index: 200;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #02040a;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#transition.fire {
+  visibility: visible;
+  animation: transitionFlash .85s ease forwards;
+}
+
+.portal-ring {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 25px var(--cyan), inset 0 0 25px var(--cyan);
+  opacity: 0;
+}
+
+#transition.fire .portal-ring {
+  animation: portalExpand .85s cubic-bezier(.1, .7, .2, 1) forwards;
+}
+
+.portal-ring:nth-child(2) {
+  border-color: var(--gold);
+  box-shadow: 0 0 25px var(--gold);
+  animation-delay: .05s !important;
+}
+
+.portal-ring:nth-child(3) {
+  border-color: #725aff;
+  box-shadow: 0 0 25px #725aff;
+  animation-delay: .1s !important;
+}
+
+.transition-label {
+  position: relative;
+  z-index: 2;
+  font-size: 12px;
+  letter-spacing: 5px;
+  color: white;
+  text-shadow: 0 0 18px var(--cyan);
+}
+
+@keyframes portalExpand {
+  0% {
+    width: 10px;
+    height: 10px;
+    opacity: 1;
+    border-width: 5px;
+  }
+  100% {
+    width: 180vmax;
+    height: 180vmax;
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+@keyframes transitionFlash {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* GALLERY PAGE */
+
 #events {
-  flex-direction:column; align-items:center;
-  padding:100px 15px 28px; gap:20px;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 18px 45px;
 }
-.section-heading { position:relative; z-index:2; text-align:center; width:100%; }
-.section-heading .mini {
-  color:var(--cyan); letter-spacing:4px; text-transform:uppercase;
-  font-size:10px; margin-bottom:10px;
+
+.section-head {
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+  margin-bottom: 28px;
 }
-.section-heading h2 {
-  font-size:clamp(28px,7vw,46px); font-style:italic; letter-spacing:2px;
-  text-shadow:0 0 20px #00eaff20;
+
+.kicker {
+  color: var(--cyan);
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
 }
-.section-heading h2 span { color:var(--gold); }
-.gallery { position:relative; z-index:2; width:100%; max-width:950px; }
+
+.section-title {
+  font-size: clamp(28px, 7vw, 54px);
+  font-weight: 950;
+  font-style: italic;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+
+.section-title span {
+  color: var(--cyan);
+  text-shadow: 0 0 22px #00f5ff55;
+}
+
+.section-desc {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.gallery-shell {
+  width: 100%;
+  max-width: 950px;
+  position: relative;
+  padding: 0 40px;
+}
+
 .gallery-frame {
-  position:relative; width:100%; height:min(57svh,510px); min-height:260px;
-  overflow:hidden; border:1px solid #00eaff66; border-radius:18px;
-  background:#101722; box-shadow:0 0 30px #00eaff20,0 20px 60px #0009;
-  isolation:isolate;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: 520px;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid #00f5ff6b;
+  background: #080d19;
+  box-shadow: 0 0 35px #00f5ff13, 0 20px 70px #0009;
+  isolation: isolate;
+  touch-action: pan-y;
 }
-.gallery-frame:before {
-  content:""; position:absolute; z-index:4; inset:0; pointer-events:none;
-  border:1px solid #ffffff0a; border-radius:inherit;
-  box-shadow:inset 0 0 35px #00eaff0a;
+
+.gallery-frame::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(130deg, var(--cyan), transparent 35%, #7954ff 65%, var(--gold));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
-.event-card {
-  position:absolute; inset:0; opacity:0; visibility:hidden;
-  transform:scale(1.08); filter:brightness(.6);
-  transition:opacity .7s ease,transform 1.1s ease,filter .7s,visibility .7s;
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.1);
+  transition: opacity .8s ease, transform 1.5s cubic-bezier(.2, .7, .2, 1);
+  pointer-events: none;
 }
-.event-card.active {
-  opacity:1; visibility:visible; transform:scale(1); filter:brightness(1); z-index:1;
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
 }
-.event-card img {
-  display:block; width:100%; height:100%; object-fit:cover;
-  background:linear-gradient(135deg,#142432,#05070c);
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: brightness(.78) saturate(1.15);
+  transition: transform 5s ease, filter .8s;
 }
-.event-card:after {
-  content:""; position:absolute; inset:45% 0 0;
-  background:linear-gradient(transparent,#000e); pointer-events:none;
+
+.slide.active img {
+  transform: scale(1.08);
+  filter: brightness(.8) saturate(1.2);
 }
-.card-brand {
-  position:absolute; z-index:2; left:15px; right:15px; bottom:23px;
-  text-align:center; font-size:clamp(21px,5vw,42px); line-height:1.1;
-  font-style:italic; font-weight:1000; letter-spacing:2px;
-  color:#fff; text-shadow:0 0 14px #00eaff88;
+
+.slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #02040be8 0%, transparent 65%);
 }
-.card-brand span {
-  display:block; color:var(--gold); font-size:.52em;
-  letter-spacing:5px; margin-top:8px;
+
+.slide-caption {
+  position: absolute;
+  z-index: 3;
+  left: 20px;
+  right: 20px;
+  bottom: 23px;
+  font-size: clamp(14px, 3.8vw, 25px);
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px #000;
 }
+
+.slide-caption span {
+  color: var(--cyan);
+}
+
 .gallery-arrow {
-  position:absolute; z-index:5; top:50%; transform:translateY(-50%);
-  width:43px; height:43px; border:1px solid #ffffff77; border-radius:50%;
-  background:#03070bd9; color:white; font-size:26px; cursor:pointer;
-  transition:.2s;
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid #00f5ff88;
+  background: #030713dd;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: .25s;
 }
-.gallery-arrow:hover { background:var(--cyan); color:#001016; }
-.gallery-arrow.prev { left:12px; }
-.gallery-arrow.next { right:12px; }
-.gallery-bottom {
-  display:flex; justify-content:space-between; align-items:center;
-  gap:12px; margin-top:14px;
+
+.gallery-arrow:hover {
+  color: #03050b;
+  background: var(--cyan);
+  box-shadow: 0 0 25px #00f5ff77;
 }
-.counter { font-size:11px; letter-spacing:2px; color:#b9c9d4; }
-.dots { display:flex; align-items:center; justify-content:center; gap:8px; }
+
+.gallery-arrow.prev { left: -2px; }
+.gallery-arrow.next { right: -2px; }
+
+.gallery-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  max-width: 870px;
+  width: 100%;
+  margin: 18px auto 0;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
 .dot {
-  width:7px; height:7px; border:0; border-radius:20px;
-  background:#63727d; cursor:pointer; transition:.3s;
+  width: 7px;
+  height: 7px;
+  border: none;
+  border-radius: 20px;
+  background: #556079;
+  cursor: pointer;
+  transition: .3s;
 }
-.dot.active { width:25px; background:var(--cyan); box-shadow:0 0 10px var(--cyan); }
-.event-actions {
-  position:relative; z-index:2; display:flex; flex-wrap:wrap;
-  justify-content:center; gap:12px; padding-bottom:10px;
-}
-.small-note { color:#778c99; font-size:10px; letter-spacing:2px; text-align:center; }
 
-/* CONTACT */
-#contact { align-items:center; justify-content:center; padding:100px 20px 40px; }
-.contact-wrap { position:relative; z-index:2; width:100%; max-width:650px; text-align:center; }
-.contact-kicker { color:var(--cyan); font-size:10px; letter-spacing:5px; margin-bottom:17px; }
-.contact-wrap h2 {
-  font-size:clamp(34px,8vw,65px); font-style:italic; font-weight:1000;
-  background:linear-gradient(100deg,#fff,var(--cyan),var(--gold));
-  color:transparent; background-clip:text; -webkit-background-clip:text;
+.dot.active {
+  width: 28px;
+  background: var(--cyan);
+  box-shadow: 0 0 12px #00f5ff88;
 }
-.subtitle { margin-top:14px; color:#b2c3ce; font-size:14px; line-height:1.8; }
+
+.gallery-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 27px;
+}
+
+.neon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 13px 22px;
+  border: 1px solid #00f5ff88;
+  border-radius: 50px;
+  background: linear-gradient(120deg, #00f5ff12, #725aff12);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.neon-btn:hover {
+  transform: translateY(-3px);
+  border-color: var(--cyan);
+  box-shadow: 0 0 25px #00f5ff28;
+}
+
+.neon-btn.gold {
+  border-color: #ffc85788;
+}
+
+.neon-btn.gold:hover {
+  box-shadow: 0 0 25px #ffc85725;
+}
+
+/* CONTACT PAGE */
+
+#contact {
+  align-items: center;
+  justify-content: center;
+  padding: 110px 20px 50px;
+}
+
+.contact-container {
+  width: 100%;
+  max-width: 720px;
+  text-align: center;
+}
+
+.contact-orb {
+  width: 95px;
+  height: 95px;
+  margin: 0 auto 28px;
+  border: 1px solid #00f5ff88;
+  border-radius: 28px;
+  display: grid;
+  place-items: center;
+  font-size: 38px;
+  color: var(--cyan);
+  background: linear-gradient(145deg, #00f5ff12, #7755ff19);
+  box-shadow: 0 0 35px #00f5ff18, inset 0 0 25px #00f5ff0c;
+  animation: orbFloat 4s ease-in-out infinite;
+}
+
+@keyframes orbFloat {
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+
+.contact-title {
+  font-size: clamp(32px, 8vw, 65px);
+  font-weight: 950;
+  font-style: italic;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.contact-title span {
+  display: block;
+  color: var(--cyan);
+  text-shadow: 0 0 25px #00f5ff3d;
+}
+
+.contact-description {
+  max-width: 430px;
+  margin: 18px auto 28px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
 .contact-card {
-  margin:32px auto 24px; padding:28px 20px; max-width:460px;
-  border:1px solid #00eaff55; border-radius:20px;
-  background:linear-gradient(145deg,#0c1720ee,#10111add);
-  box-shadow:0 0 35px #00eaff12;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 23px;
+  border: 1px solid #ffffff1c;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #10192bdb, #080b16ed);
+  box-shadow: 0 15px 55px #0006;
+  text-align: left;
 }
-.contact-label { color:#93a8b4; font-size:10px; letter-spacing:4px; text-transform:uppercase; }
-.phone-number { margin:15px 0 23px; color:#fff; font-size:clamp(25px,7vw,36px); letter-spacing:2px; font-weight:800; }
-.contact-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
-.back-btn { margin-top:18px; }
-.footer { margin-top:34px; color:#647985; font-size:9px; letter-spacing:2px; }
 
-/* SMALL SCREENS */
-@media(max-width:500px) {
-  .logo-wrap { width:52px; height:52px; top:10px; right:10px; }
-  #events { padding-top:88px; }
-  .gallery-frame { height:53svh; min-height:270px; }
-  .gallery-arrow { width:37px; height:37px; }
-  .gallery-arrow.prev { left:8px; }
-  .gallery-arrow.next { right:8px; }
-  .gallery-bottom { flex-wrap:wrap; justify-content:center; }
-  .card-brand span { letter-spacing:3px; }
-  .event-actions .neon-btn { padding:12px 17px; }
+.contact-label {
+  color: var(--cyan);
+  font-size: 9px;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
 }
-@media(prefers-reduced-motion:reduce) {
-  *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; }
+
+.phone-number {
+  font-size: clamp(23px, 6vw, 32px);
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 22px;
+}
+
+.contact-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.contact-actions a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 48px;
+  padding: 12px 8px;
+  border: 1px solid #00f5ff66;
+  border-radius: 12px;
+  background: #00f5ff0b;
+  text-align: center;
+  font-size: 11px;
+  font-weight: bold;
+  transition: .25s;
+}
+
+.contact-actions a.whatsapp {
+  border-color: #25d36688;
+  background: #25d3660b;
+}
+
+.contact-actions a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px #00f5ff20;
+}
+
+.contact-actions a.whatsapp:hover {
+  box-shadow: 0 0 20px #25d36620;
+}
+
+.back-btn {
+  margin-top: 24px;
+}
+
+.footer {
+  margin-top: 32px;
+  color: #71809e;
+  font-size: 9px;
+  line-height: 1.8;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.footer strong {
+  color: var(--gold);
+}
+
+/* GLOBAL SCAN EFFECT */
+
+.scanline {
+  position: fixed;
+  z-index: 70;
+  left: 0;
+  top: -20%;
+  width: 100%;
+  height: 100px;
+  pointer-events: none;
+  background: linear-gradient(transparent, #00f5ff08, transparent);
+  animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+  to { top: 120%; }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .brand-logo {
+    width: 52px;
+    height: 52px;
+    top: 12px;
+    right: 12px;
+    border-radius: 15px;
+  }
+
+  .status {
+    top: 20px;
+    left: 12px;
+    font-size: 8px;
+    letter-spacing: 1.4px;
+  }
+
+  #intro {
+    padding-top: 90px;
+  }
+
+  .intro-tagline {
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+  }
+
+  #events {
+    padding-top: 100px;
+  }
+
+  .gallery-shell {
+    padding: 0 23px;
+  }
+
+  .gallery-frame {
+    aspect-ratio: 4 / 3;
+    border-radius: 15px;
+  }
+
+  .gallery-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 21px;
+  }
+
+  .gallery-arrow.prev { left: -9px; }
+  .gallery-arrow.next { right: -9px; }
+
+  .slide-caption {
+    left: 13px;
+    bottom: 15px;
+    right: 12px;
+    letter-spacing: 1px;
+  }
+
+  .gallery-meta {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .contact-card {
+    padding: 18px;
+  }
+
+  .contact-actions a {
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
 }
 </style>
 </head>
 
 <body>
-<div class="ambient" aria-hidden="true"></div>
 
-<!-- LOGO: upload logo.png into the same folder as index.html -->
-<div class="logo-wrap" id="logoWrap">
-  <img class="site-logo" id="siteLogo" src="./logo.png" alt="GLAD Sounds and Decor logo">
-  <span class="logo-fallback" aria-label="GSD logo">GSD</span>
+<div id="universe" aria-hidden="true">
+  <div class="grid-floor"></div>
+  <div class="ambient one"></div>
+  <div class="ambient two"></div>
 </div>
 
-<div class="portal" id="portal" aria-hidden="true"></div>
-<div class="transition-flash" id="transitionFlash" aria-hidden="true"></div>
+<div class="scanline" aria-hidden="true"></div>
+
+<div class="status">
+  <span class="status-dot"></span>
+  <span>GSD SYSTEM ONLINE</span>
+</div>
+
+<a class="brand-logo" href="#" onclick="return false" aria-label="GLAD SOUNDS AND DECOR logo">
+  <img src="./logo.png" alt="GSD Logo"
+       onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+  <span class="logo-fallback" style="display:none">GSD</span>
+</a>
 
 <!-- CINEMATIC INTRO -->
+
 <section class="page active" id="intro">
-  <div class="netflix-line"></div>
   <div class="intro-content">
-    <p class="intro-kicker">AN EXPERIENCE BY</p>
-    <div class="initials" aria-label="G S D">
-      <span class="initial">G</span>
-      <span class="initial">S</span>
-      <span class="initial">D</span>
+    <div class="intro-eyebrow">AN EXPERIENCE BEYOND ORDINARY</div>
+
+    <div class="monogram" aria-label="G S D">
+      <span class="letter">G</span>
+      <span class="letter">S</span>
+      <span class="letter">D</span>
     </div>
-    <div class="brand-name">
-      <h1>GLAD</h1>
-      <p>SOUNDS AND DECOR</p>
-    </div>
-    <p class="intro-caption">SOUND · LIGHT · CELEBRATION</p>
+
+    <div class="laser"></div>
+
+    <h1 class="brand-title">
+      GLAD
+      <span>SOUNDS AND DECOR</span>
+    </h1>
+
+    <p class="intro-tagline">
+      SOUND • LIGHT • DECOR • UNFORGETTABLE MOMENTS
+    </p>
+
+    <button class="intro-button" onclick="openPage('events')">
+      ENTER THE EXPERIENCE &nbsp; ↗
+    </button>
   </div>
-  <div class="intro-bottom">PREPARE TO EXPERIENCE THE EXTRAORDINARY</div>
+
+  <div class="intro-footer">CREATING MOMENTS THAT STAY FOREVER</div>
 </section>
 
 <!-- EVENT GALLERY -->
+
 <section class="page" id="events">
-  <header class="section-heading">
-    <p class="mini">Make every moment extraordinary</p>
-    <h2>OUR <span>EVENTS</span></h2>
+  <header class="section-head">
+    <div class="kicker">WELCOME TO OUR WORLD</div>
+    <h2 class="section-title">BEYOND THE <span>ORDINARY</span></h2>
+    <p class="section-desc">
+      Explore the atmosphere. Feel the energy. Make every occasion unforgettable.
+    </p>
   </header>
 
-  <div class="gallery">
-    <div class="gallery-frame" id="galleryFrame">
-      <article class="event-card active">
-        <img src="./a.jpg" alt="GLAD event photo 1">
-        <h3 class="card-brand">GLAD <span>SOUNDS AND DECOR</span></h3>
-      </article>
-      <article class="event-card">
-        <img src="./b.jpg" alt="GLAD event photo 2">
-        <h3 class="card-brand">GLAD <span>SOUNDS AND DECOR</span></h3>
-      </article>
-      <article class="event-card">
-        <img src="./c.jpg" alt="GLAD event photo 3">
-        <h3 class="card-brand">GLAD <span>SOUNDS AND DECOR</span></h3>
-      </article>
-      <article class="event-card">
-        <img src="./d.jpg" alt="GLAD event photo 4">
-        <h3 class="card-brand">GLAD <span>SOUNDS AND DECOR</span></h3>
-      </article>
-      <article class="event-card">
-        <img src="./e.jpg" alt="GLAD event photo 5">
-        <h3 class="card-brand">GLAD <span>SOUNDS AND DECOR</span></h3>
-      </article>
-      <article class="event-card">
-        <img src="./f.jpg" alt="GLAD event photo 6">
-        <h3 class="card-brand">GLAD <span>SOUNDS AND DECOR</span></h3>
+  <div class="gallery-shell">
+    <button class="gallery-arrow prev" onclick="changeSlide(-1)" aria-label="Previous image">‹</button>
+
+    <div class="gallery-frame" id="galleryFrame" aria-label="Event photo gallery">
+
+      <article class="slide active">
+        <img src="./a.jpg" alt="Event production and decoration" fetchpriority="high">
+        <div class="slide-caption">GLAD <span>SOUNDS AND DECOR</span></div>
       </article>
 
-      <button class="gallery-arrow prev" id="prevBtn" aria-label="Previous photo">‹</button>
-      <button class="gallery-arrow next" id="nextBtn" aria-label="Next photo">›</button>
+      <article class="slide">
+        <img src="./b.jpg" alt="Event sound and lighting" loading="lazy">
+        <div class="slide-caption">GLAD <span>SOUNDS AND DECOR</span></div>
+      </article>
+
+      <article class="slide">
+        <img src="./c.jpg" alt="Event celebration setup" loading="lazy">
+        <div class="slide-caption">GLAD <span>SOUNDS AND DECOR</span></div>
+      </article>
+
+      <article class="slide">
+        <img src="./d.jpg" alt="Professional event setup" loading="lazy">
+        <div class="slide-caption">GLAD <span>SOUNDS AND DECOR</span></div>
+      </article>
+
+      <article class="slide">
+        <img src="./e.jpg" alt="Lighting and event atmosphere" loading="lazy">
+        <div class="slide-caption">GLAD <span>SOUNDS AND DECOR</span></div>
+      </article>
+
+      <article class="slide">
+        <img src="./f.jpg" alt="Memorable celebration" loading="lazy">
+        <div class="slide-caption">GLAD <span>SOUNDS AND DECOR</span></div>
+      </article>
+
     </div>
 
-    <div class="gallery-bottom">
-      <span class="counter" id="counter">01 / 06</span>
-      <div class="dots" id="dots" aria-label="Choose a photo"></div>
-      <span class="counter">GSD • OFFICIAL</span>
-    </div>
+    <button class="gallery-arrow next" onclick="changeSlide(1)" aria-label="Next image">›</button>
   </div>
 
-  <div class="event-actions">
-    <button class="neon-btn gold-btn" id="contactBtn">CONTACT US ↗</button>
+  <div class="gallery-meta">
+    <span id="slideCount">01 / 06</span>
+    <div class="dots" id="dots" aria-label="Choose gallery image"></div>
+    <span>SWIPE TO EXPLORE</span>
   </div>
-  <p class="small-note">SWIPE TO EXPLORE OUR GALLERY</p>
+
+  <div class="gallery-actions">
+    <button class="neon-btn" onclick="openPage('contact')">✦ BOOK YOUR EVENT</button>
+    <button class="neon-btn gold" onclick="openPage('contact')">CONTACT US ↗</button>
+  </div>
+
+  <div class="footer">
+    <strong>GLAD SOUNDS AND DECOR</strong><br>
+    EVERY EVENT. A NEW EXPERIENCE.
+  </div>
 </section>
 
-<!-- CONTACT -->
+<!-- CONTACT PAGE -->
+
 <section class="page" id="contact">
-  <div class="contact-wrap">
-    <p class="contact-kicker">LET'S CREATE SOMETHING AMAZING</p>
-    <h2>CONTACT US</h2>
-    <p class="subtitle">
-      Make your celebration unforgettable with<br>
-      GLAD SOUNDS AND DECOR.
+  <div class="contact-container">
+    <div class="contact-orb" aria-hidden="true">✦</div>
+
+    <div class="kicker">LET'S CREATE SOMETHING AMAZING</div>
+
+    <h2 class="contact-title">
+      YOUR EVENT.
+      <span>OUR MAGIC.</span>
+    </h2>
+
+    <p class="contact-description">
+      Have an event in mind? Get in touch with GLAD SOUNDS AND DECOR
+      and let's make your special occasion unforgettable.
     </p>
 
     <div class="contact-card">
-      <p class="contact-label">CALL OR WHATSAPP</p>
-      <p class="phone-number">9663019431</p>
+      <div class="contact-label">CONTACT NUMBER</div>
+
+      <div class="phone-number">+91 95381 60143</div>
+
       <div class="contact-actions">
-        <a class="neon-btn" href="tel:+919663019431">☎ CALL NOW</a>
-        <a class="neon-btn gold-btn" href="https://wa.me/919663019431"
-           target="_blank" rel="noopener noreferrer">WHATSAPP ↗</a>
+        <a href="tel:+919538160143">
+          <span>☎</span> CALL NOW
+        </a>
+
+        <a class="whatsapp"
+           href="https://wa.me/919538160143"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span>✆</span> WHATSAPP
+        </a>
       </div>
     </div>
 
-    <button class="neon-btn back-btn" id="backBtn">← BACK TO EVENTS</button>
-    <p class="footer">GLAD SOUNDS AND DECOR · EVERY MOMENT MATTERS</p>
+    <button class="neon-btn back-btn" onclick="openPage('events')">
+      ← BACK TO GALLERY
+    </button>
+
+    <div class="footer">
+      <strong>GLAD SOUNDS AND DECOR</strong><br>
+      SOUND • LIGHT • DECOR • EXPERIENCES<br>
+      © <span id="year"></span> ALL RIGHTS RESERVED
+    </div>
   </div>
 </section>
 
+<!-- TRANSITION PORTAL -->
+
+<div id="transition" aria-hidden="true">
+  <div class="portal-ring"></div>
+  <div class="portal-ring"></div>
+  <div class="portal-ring"></div>
+  <div class="transition-label">GSD EXPERIENCE</div>
+</div>
+
 <script>
-(() => {
-  "use strict";
+const pages = {
+  intro: document.getElementById("intro"),
+  events: document.getElementById("events"),
+  contact: document.getElementById("contact")
+};
 
-  const pages = {
-    intro: document.getElementById("intro"),
-    events: document.getElementById("events"),
-    contact: document.getElementById("contact")
-  };
+const portal = document.getElementById("transition");
+const slides = Array.from(document.querySelectorAll(".slide"));
+const dotsContainer = document.getElementById("dots");
+const slideCount = document.getElementById("slideCount");
+const galleryFrame = document.getElementById("galleryFrame");
 
-  const portal = document.getElementById("portal");
-  const flash = document.getElementById("transitionFlash");
-  const logo = document.getElementById("siteLogo");
-  const logoWrap = document.getElementById("logoWrap");
+let currentPage = "intro";
+let currentSlide = 0;
+let slideTimer = null;
+let transitionBusy = false;
+let touchStartX = 0;
+let touchStartY = 0;
 
-  let currentPage = "intro";
-  let currentSlide = 0;
-  let slideTimer = null;
-  let introTimer = null;
-  let touchStartX = 0;
-  let touchStartY = 0;
+document.getElementById("year").textContent = new Date().getFullYear();
 
-  const cards = [...document.querySelectorAll(".event-card")];
-  const dotsContainer = document.getElementById("dots");
-  const counter = document.getElementById("counter");
-  const galleryFrame = document.getElementById("galleryFrame");
+/* GALLERY DOTS */
 
-  // Show a GSD badge if logo.png cannot be loaded.
-  logo.addEventListener("error", () => logoWrap.classList.add("broken"));
-  logo.addEventListener("load", () => logoWrap.classList.remove("broken"));
+slides.forEach((slide, index) => {
+  const dot = document.createElement("button");
+  dot.className = "dot" + (index === 0 ? " active" : "");
+  dot.setAttribute("aria-label", "Show image " + (index + 1));
+  dot.addEventListener("click", () => {
+    showSlide(index);
+    restartSlideshow();
+  });
+  dotsContainer.appendChild(dot);
+});
 
-  function stopSlideshow() {
-    if (slideTimer !== null) {
-      clearInterval(slideTimer);
-      slideTimer = null;
+const dots = Array.from(dotsContainer.querySelectorAll(".dot"));
+
+function showSlide(index) {
+  currentSlide = (index + slides.length) % slides.length;
+
+  slides.forEach((slide, i) => {
+    slide.classList.toggle("active", i === currentSlide);
+  });
+
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === currentSlide);
+  });
+
+  slideCount.textContent =
+    String(currentSlide + 1).padStart(2, "0") +
+    " / " +
+    String(slides.length).padStart(2, "0");
+}
+
+function changeSlide(direction) {
+  showSlide(currentSlide + direction);
+  restartSlideshow();
+}
+
+function startSlideshow() {
+  stopSlideshow();
+  slideTimer = setInterval(() => {
+    if (currentPage === "events" && !document.hidden) {
+      showSlide(currentSlide + 1);
     }
+  }, 4500);
+}
+
+function stopSlideshow() {
+  if (slideTimer !== null) {
+    clearInterval(slideTimer);
+    slideTimer = null;
   }
+}
 
-  function startSlideshow() {
-    stopSlideshow();
-    if (currentPage !== "events") return;
-    slideTimer = setInterval(() => showSlide(currentSlide + 1), 5000);
-  }
-
-  function navigateTo(name) {
-    if (!pages[name]) return;
-    currentPage = name;
-
-    Object.values(pages).forEach(page => page.classList.remove("active"));
-    pages[name].classList.add("active");
-
-    if (name === "events") startSlideshow();
-    else stopSlideshow();
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  function transitionTo(name) {
-    if (!pages[name]) return;
-
-    portal.classList.remove("open");
-    flash.classList.remove("run");
-    void portal.offsetWidth;
-    void flash.offsetWidth;
-    portal.classList.add("open");
-    flash.classList.add("run");
-
-    setTimeout(() => navigateTo(name), 320);
-    setTimeout(() => {
-      portal.classList.remove("open");
-      flash.classList.remove("run");
-    }, 900);
-  }
-
-  function startIntro() {
-    clearTimeout(introTimer);
-    currentPage = "intro";
-    pages.intro.classList.add("active");
-    pages.events.classList.remove("active");
-    pages.contact.classList.remove("active");
-    pages.intro.classList.remove("playing");
-    void pages.intro.offsetWidth;
-    pages.intro.classList.add("playing");
-
-    // Dramatic reveal, then transition to the event gallery.
-    introTimer = setTimeout(() => transitionTo("events"), 5600);
-  }
-
-  function buildDots() {
-    dotsContainer.innerHTML = "";
-    cards.forEach((card, index) => {
-      const dot = document.createElement("button");
-      dot.type = "button";
-      dot.className = "dot";
-      dot.setAttribute("aria-label", "Show photo " + (index + 1));
-      dot.addEventListener("click", () => {
-        showSlide(index);
-        startSlideshow();
-      });
-      dotsContainer.appendChild(dot);
-    });
-  }
-
-  function showSlide(index) {
-    currentSlide = (index + cards.length) % cards.length;
-    cards.forEach((card, i) => card.classList.toggle("active", i === currentSlide));
-
-    [...dotsContainer.children].forEach((dot, i) => {
-      dot.classList.toggle("active", i === currentSlide);
-    });
-
-    counter.textContent =
-      String(currentSlide + 1).padStart(2, "0") + " / " +
-      String(cards.length).padStart(2, "0");
-  }
-
-  document.getElementById("nextBtn").addEventListener("click", () => {
-    showSlide(currentSlide + 1);
+function restartSlideshow() {
+  if (currentPage === "events") {
     startSlideshow();
-  });
+  }
+}
 
-  document.getElementById("prevBtn").addEventListener("click", () => {
-    showSlide(currentSlide - 1);
-    startSlideshow();
-  });
+/* SWIPE GESTURES */
 
-  document.getElementById("contactBtn").addEventListener("click", () => {
-    transitionTo("contact");
-  });
+galleryFrame.addEventListener("touchstart", event => {
+  touchStartX = event.changedTouches[0].clientX;
+  touchStartY = event.changedTouches[0].clientY;
+}, { passive: true });
 
-  document.getElementById("backBtn").addEventListener("click", () => {
-    transitionTo("events");
-  });
+galleryFrame.addEventListener("touchend", event => {
+  const deltaX = event.changedTouches[0].clientX - touchStartX;
+  const deltaY = event.changedTouches[0].clientY - touchStartY;
 
-  galleryFrame.addEventListener("touchstart", event => {
-    const touch = event.changedTouches[0];
-    touchStartX = touch.clientX;
-    touchStartY = touch.clientY;
-  }, { passive: true });
+  if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
+    changeSlide(deltaX < 0 ? 1 : -1);
+  }
+}, { passive: true });
 
-  galleryFrame.addEventListener("touchend", event => {
-    const touch = event.changedTouches[0];
-    const dx = touch.clientX - touchStartX;
-    const dy = touch.clientY - touchStartY;
+/* FUTURISTIC PAGE TRANSITIONS */
 
-    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
-      showSlide(currentSlide + (dx < 0 ? 1 : -1));
+function openPage(target) {
+  if (!pages[target] || target === currentPage || transitionBusy) return;
+
+  transitionBusy = true;
+  stopSlideshow();
+
+  portal.classList.remove("fire");
+  void portal.offsetWidth;
+  portal.classList.add("fire");
+
+  const oldPage = pages[currentPage];
+  oldPage.classList.add("leaving");
+
+  setTimeout(() => {
+    oldPage.classList.remove("active", "leaving");
+
+    currentPage = target;
+    pages[target].classList.add("active");
+
+    window.scrollTo({ top: 0, behavior: "instant" });
+
+    if (target === "events") {
       startSlideshow();
     }
-  }, { passive: true });
 
-  galleryFrame.addEventListener("mouseenter", stopSlideshow);
-  galleryFrame.addEventListener("mouseleave", startSlideshow);
+    setTimeout(() => {
+      portal.classList.remove("fire");
+      transitionBusy = false;
+    }, 350);
+  }, 320);
+}
 
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) stopSlideshow();
-    else startSlideshow();
-  });
+/* PAUSE GALLERY WHEN THE TAB IS HIDDEN */
 
-  buildDots();
-  showSlide(0);
-  startIntro();
-})();
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    stopSlideshow();
+  } else if (currentPage === "events") {
+    startSlideshow();
+  }
+});
+
+/* KEYBOARD NAVIGATION */
+
+document.addEventListener("keydown", event => {
+  if (currentPage !== "events") return;
+
+  if (event.key === "ArrowRight") changeSlide(1);
+  if (event.key === "ArrowLeft") changeSlide(-1);
+});
+
+/* AUTOMATIC CINEMATIC INTRO */
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    if (currentPage === "intro") {
+      openPage("events");
+    }
+  }, 6500);
+});
 </script>
+
 </body>
 </html>
