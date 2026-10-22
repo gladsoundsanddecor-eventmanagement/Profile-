@@ -130,7 +130,7 @@ button {
   to { opacity: 1; }
 }
 
-/* INTRO */
+/* CINEMATIC INTRO */
 
 #intro {
   min-height: 100svh;
@@ -186,14 +186,13 @@ button {
 }
 
 .gsd-letter {
-  position: relative;
   font-family: 'Orbitron', sans-serif;
   font-weight: 900;
   font-size: clamp(65px, 17vw, 145px);
   line-height: 1;
   font-style: italic;
   color: transparent;
-  background: linear-gradient(145deg, #ffffff 5%, #b6ffff 24%,
+  background: linear-gradient(145deg, #fff 5%, #b6ffff 24%,
     var(--cyan) 43%, #5177ff 65%, var(--gold) 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -219,7 +218,6 @@ button {
 }
 
 .netflix-line {
-  position: relative;
   height: 2px;
   width: 0;
   max-width: 440px;
@@ -430,9 +428,7 @@ button {
   text-shadow: 0 0 9px var(--cyan), 0 0 25px rgba(0,245,255,.65);
 }
 
-.gallery-brand span {
-  color: var(--gold);
-}
+.gallery-brand span { color: var(--gold); }
 
 .gallery-arrow {
   position: absolute;
@@ -500,7 +496,6 @@ button {
 }
 
 .neon-button {
-  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -629,9 +624,7 @@ button {
   text-shadow: 0 0 13px rgba(0,245,255,.42);
 }
 
-.phone-number:hover {
-  color: var(--cyan);
-}
+.phone-number:hover { color: var(--cyan); }
 
 .contact-actions {
   display: flex;
@@ -640,9 +633,7 @@ button {
   gap: 12px;
 }
 
-.contact-actions a {
-  flex: 1 1 170px;
-}
+.contact-actions a { flex: 1 1 170px; }
 
 .contact-footer {
   color: #77869e;
@@ -660,7 +651,49 @@ button {
   margin-top: 25px;
 }
 
-/* TRANSITION: PRESERVED HYBRID PORTAL EFFECT */
+/* MUSIC BUTTON */
+
+.music-control {
+  position: fixed;
+  z-index: 80;
+  left: 16px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 15px;
+  color: var(--cyan);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  background: rgba(5,10,25,.92);
+  border: 1px solid rgba(0,245,255,.7);
+  border-radius: 30px;
+  box-shadow: 0 0 18px rgba(0,245,255,.2);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+
+.music-control.playing {
+  color: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(255,211,106,.25);
+}
+
+.music-icon {
+  font-size: 16px;
+}
+
+.music-control.playing .music-icon {
+  animation: musicPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+/* PORTAL TRANSITIONS */
 
 .portal {
   position: fixed;
@@ -758,8 +791,13 @@ button {
     text-align: center;
   }
 
-  .gallery-dots {
-    order: 2;
+  .gallery-dots { order: 2; }
+
+  .music-control {
+    left: 10px;
+    bottom: 12px;
+    padding: 10px 12px;
+    font-size: 9px;
   }
 }
 
@@ -776,18 +814,28 @@ button {
 
 <body>
 
-<!-- Fixed company logo -->
+<!-- COMPANY LOGO -->
 <div class="logo">
   <img src="./logo.png" alt="GSD Logo"
        onerror="this.style.display='none';document.getElementById('logoFallback').style.display='block';">
   <span class="logo-fallback" id="logoFallback" style="display:none;">GSD</span>
 </div>
 
-<!-- Portal transition elements -->
+<!-- BACKGROUND MUSIC -->
+<audio id="backgroundMusic" loop preload="auto">
+  <source src="./Sajate_Hain_Sapno_Ka_Jahan.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-control" id="musicToggle" type="button" aria-label="Toggle background music">
+  <span class="music-icon">♫</span>
+  <span id="musicLabel">TAP FOR MUSIC</span>
+</button>
+
+<!-- TRANSITION EFFECTS -->
 <div class="portal" id="portal"></div>
 <div class="transition-flash" id="transitionFlash"></div>
 
-<!-- INTRO PAGE -->
+<!-- INTRO -->
 <section class="page active" id="intro">
   <div class="intro-orb"></div>
 
@@ -818,7 +866,7 @@ button {
   </div>
 </section>
 
-<!-- GALLERY PAGE -->
+<!-- GALLERY -->
 <section class="page" id="events">
   <header class="section-heading">
     <div class="eyebrow">OUR WORLD • OUR CREATIONS</div>
@@ -857,7 +905,7 @@ button {
   </div>
 </section>
 
-<!-- CONTACT PAGE -->
+<!-- CONTACT -->
 <section class="page" id="contact">
   <div class="contact-panel">
     <div class="contact-symbol">✦</div>
@@ -877,9 +925,7 @@ button {
     </a>
 
     <div class="contact-actions">
-      <a class="neon-button" href="tel:+919538160143">
-        ☎ CALL NOW
-      </a>
+      <a class="neon-button" href="tel:+919538160143">☎ CALL NOW</a>
 
       <a class="neon-button gold"
          href="https://wa.me/919538160143"
@@ -900,6 +946,46 @@ button {
 
 <script>
 (() => {
+  /* BACKGROUND MUSIC */
+  const backgroundMusic = document.getElementById('backgroundMusic');
+  const musicToggle = document.getElementById('musicToggle');
+  const musicLabel = document.getElementById('musicLabel');
+
+  let musicStarted = false;
+
+  async function playBackgroundMusic() {
+    try {
+      await backgroundMusic.play();
+      musicStarted = true;
+      musicToggle.classList.add('playing');
+      musicLabel.textContent = 'MUSIC ON';
+    } catch (error) {
+      musicLabel.textContent = 'TAP FOR MUSIC';
+    }
+  }
+
+  function pauseBackgroundMusic() {
+    backgroundMusic.pause();
+    musicToggle.classList.remove('playing');
+    musicLabel.textContent = 'MUSIC OFF';
+  }
+
+  musicToggle.addEventListener('click', async () => {
+    if (backgroundMusic.paused) {
+      await playBackgroundMusic();
+    } else {
+      pauseBackgroundMusic();
+    }
+  });
+
+  // Try starting the song after the visitor's first interaction.
+  document.addEventListener('pointerdown', (event) => {
+    if (!musicStarted && !musicToggle.contains(event.target)) {
+      playBackgroundMusic();
+    }
+  }, { once: true });
+
+  /* PAGE AND GALLERY CONTROLS */
   const pages = {
     intro: document.getElementById('intro'),
     events: document.getElementById('events'),
@@ -921,15 +1007,16 @@ button {
   let touchStartX = 0;
   let touchStartY = 0;
 
-  // Create the gallery dots.
   images.forEach((image, index) => {
     const dot = document.createElement('button');
     dot.className = 'gallery-dot' + (index === 0 ? ' active' : '');
     dot.setAttribute('aria-label', 'Show gallery image ' + (index + 1));
+
     dot.addEventListener('click', () => {
       showImage(index);
       restartSlideshow();
     });
+
     dotsContainer.appendChild(dot);
   });
 
@@ -961,6 +1048,7 @@ button {
 
   function startSlideshow() {
     stopSlideshow();
+
     slideTimer = setInterval(() => {
       if (currentPage === 'events' && !transitionBusy) {
         showImage(currentImage + 1);
@@ -983,7 +1071,6 @@ button {
     pages.intro.classList.add('active');
     pages.intro.classList.remove('playing');
 
-    // Restart the intro animations without changing their timing.
     void pages.intro.offsetWidth;
     pages.intro.classList.add('playing');
 
@@ -999,6 +1086,7 @@ button {
 
     transitionBusy = true;
     clearTimeout(introTimer);
+
     flash.classList.remove('go');
     portal.classList.remove('open');
 
@@ -1047,7 +1135,7 @@ button {
   document.getElementById('replayIntro').addEventListener('click', startIntro);
   document.getElementById('replayIntroContact').addEventListener('click', startIntro);
 
-  // Swipe left or right through gallery images.
+  // Swipe gallery on phones.
   galleryFrame.addEventListener('touchstart', event => {
     touchStartX = event.changedTouches[0].screenX;
     touchStartY = event.changedTouches[0].screenY;
@@ -1065,7 +1153,7 @@ button {
     }
   }, { passive: true });
 
-  // Keyboard navigation for desktop users.
+  // Keyboard gallery controls.
   document.addEventListener('keydown', event => {
     if (currentPage !== 'events') return;
 
@@ -1080,7 +1168,7 @@ button {
     }
   });
 
-  // Start the cinematic intro.
+  // Start cinematic intro and its existing automatic transition.
   startIntro();
 })();
 </script>
